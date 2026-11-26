@@ -1,0 +1,7 @@
+async function requestEmbedding(content:string,apiKey=process.env.GEMINI_API_KEY,model=process.env.GEMINI_EMBEDDING_MODEL||'gemini-embedding-2'){
+ if(!apiKey)throw Error('embedding_not_configured');const response=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:embedContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':apiKey},body:JSON.stringify({model:`models/${model}`,content:{parts:[{text:content}]},output_dimensionality:768})});if(!response.ok)throw Error('embedding_request_failed');const data=await response.json() as {embedding?:{values?:number[]};embeddings?:{values?:number[]}[]};const values=data.embedding?.values||data.embeddings?.[0]?.values;if(!values||values.length!==768||values.some(x=>!Number.isFinite(x)))throw Error('invalid_embedding');return values;
+}
+export const embedQueryText=(text:string)=>requestEmbedding(`task: question answering | query: ${text}`);
+export const embedScholarshipText=(text:string)=>requestEmbedding(`title: scholarship information | text: ${text}`);
+export function vectorLiteral(values:number[]){if(values.length!==768||values.some(x=>!Number.isFinite(x)))throw Error('invalid_embedding');return `[${values.join(',')}]`}
+export function scholarshipEmbeddingText(s:any){return [s.name,s.summary,s.description,s.department,s.state_name,s.category,(s.education_levels||[]).join(', '),(s.eligible_courses||[]).join(', '),(s.target_categories||[]).join(', '),s.other_conditions,s.benefits,s.required_documents?.join(', ')].filter(Boolean).join('\n')}

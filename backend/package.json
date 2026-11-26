@@ -1,0 +1,43 @@
+{
+    "name": "@schemesetu/backend",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "tsx watch src/index.ts",
+        "build": "tsc -p tsconfig.json",
+        "start": "node dist/index.js",
+        "test": "vitest run"
+    },
+    "dependencies": {
+        "@langchain/core": "^1.5.0",
+        "@langchain/google-genai": "^2.3.7",
+        "@supabase/supabase-js": "^2.48.1",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2",
+        "express-rate-limit": "^7.5.0",
+        "helmet": "^8.0.0",
+        "ipaddr.js": "^1.9.1",
+        "node-cron": "^4.6.0",
+        "nodemailer": "^10.6.1",
+        "pdfjs-dist": "^6.5.438",
+        "robots-parser": "^3.1.1",
+        "tesseract.js": "^7.0.0",
+        "web-push": "^4.0.0",
+        "zod": "^4.6.7"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.17",
+        "@types/express": "^5.0.0",
+        "@types/node": "^22.13.4",
+        "@types/node-cron": "^3.0.11",
+        "@types/nodemailer": "^8.0.2",
+        "@types/supertest": "^7.2.1",
+        "@types/web-push": "^3.6.4",
+        "supertest": "^7.3.2",
+        "tsx": "^4.19.2",
+        "typescript": "^5.7.3",
+        "vitest": "^5.1.1"
+    }
+}
