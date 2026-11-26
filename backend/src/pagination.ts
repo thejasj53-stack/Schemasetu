@@ -1,1 +1,0 @@
-export function paginationRange(page:number,pageSize:number){if(!Number.isInteger(page)||page<1)throw new Error('page must be positive');if(![20,50,100].includes(pageSize))throw new Error('page size is not supported');const from=(page-1)*pageSize;return{from,to:from+pageSize-1}}

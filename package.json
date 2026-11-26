@@ -2,7 +2,7 @@
   "name": "schemesetu",
   "private": true,
   "version": "0.1.0",
-  "workspaces": ["frontend", "backend"],
-  "scripts": {"dev": "concurrently -k -n api,web -c blue,green \"npm:dev:api\" \"npm:dev:web\"", "dev:api": "npm --workspace backend run dev", "dev:web": "npm --workspace frontend run dev", "build": "npm --workspace backend run build && npm --workspace frontend run build"},
+  "workspaces": ["frontend"],
+  "scripts": {"dev": "concurrently -k -n api,web -c blue,green \"npm:dev:api\" \"npm:dev:web\"", "dev:api": "node scripts/run-maven.js spring-boot:run", "dev:web": "npm --workspace frontend run dev", "build": "npm --workspace frontend run build && node scripts/run-maven.js -DskipTests package"},
   "devDependencies": {"concurrently": "^9.1.2", "typescript": "^5.7.3"}
 }
